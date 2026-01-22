@@ -1,0 +1,34 @@
+models:
+  - name: stg_jaffle_shop__customers
+    description: Staging model for customers data. One row per customer.
+    columns:
+      - name: customer_id
+        description: Primary Key for customers data
+        data_tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+  - name: stg_jaffle_shop__orders
+    description: Staging model for orders data from jaffle_shop. One row per order.
+    columns:
+      - name: order_id
+        description: Primary key for orders data
+        data_tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+      - name: customer_id
+        data_tests:
+          - relationships:
+              field: customer_id
+              to: ref('stg_jaffle_shop__customers')
+      - name: status
+        description: '{{ doc("order_status") }}'
+        data_tests:
+          - accepted_values:
+              values:
+                - 'returned'
+                - 'completed'
+                - 'return_pending'
+                - 'shipped'
+                - 'placed'

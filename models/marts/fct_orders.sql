@@ -1,14 +1,16 @@
-with orders as  (
-    select * from raw.jaffle_shop.orders
+with orders as  
+(
+    select * 
+    from {{ ref('stg_jaffle_shop__orders') }}
 ),
 
 payments as (
-    select * from raw.stripe.payment
+    select * from {{ ref('stg_stripe__payment') }}
 ),
 
 order_payments as (
     select
-        orderid,
+        order_id,
         sum(case when status = 'success' then amount end) as amount
 
     from payments
@@ -18,14 +20,14 @@ order_payments as (
 final as (
 
     select
-        orders.id as order_id,
-        orders.user_id as customer_id,
+        orders.order_id,
+        orders.customer_id,
         orders.order_date,
         orders.status,
         coalesce(order_payments.amount, 0) as amount
 
     from orders
-    left join order_payments on (orders.id) = (order_payments.orderid)
+    left join order_payments on (orders.order_id) = (order_payments.order_id)
 )
 
 select * from final
