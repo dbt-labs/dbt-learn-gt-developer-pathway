@@ -13,9 +13,10 @@ renamed as (
         orderid as order_id,
         paymentmethod as payment_method,
         status,
-        amount,
+        {{ cents_to_dollars('amount') }} as amount,
         created,
-        _batched_at
+        _batched_at,
+        {{ dbt_utils.generate_surrogate_key(['payment_id', 'order_id']) }} as payment_sk
 
     from source
 

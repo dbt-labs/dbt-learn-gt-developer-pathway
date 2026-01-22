@@ -40,3 +40,6 @@ models:
     # Applies to all files under models/example/
     marts:
       +materialized: table
+      +tags: ['marts']
+    staging:
+      +schema: staging
