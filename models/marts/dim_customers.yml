@@ -1,8 +1,8 @@
 models:
 
   - name: dim_customers
-    group: marketing
     latest_version: 1
+    group: marketing
     config:
       access: public
       contract:
@@ -26,9 +26,16 @@ models:
     
     versions:
       - v: 1
-        config:
-          alias: dim_customers
-      - v: 2
-        columns:
-          - include: all
-            exclude: number_of_orders
+        
+exposures:
+  - name: customers_weekly
+    label: Weekly Customers
+    type: dashboard
+    maturity: low
+
+    depends_on:
+      - ref('dim_customers')
+
+    owner:
+      name: Jenna Bushspies
+      email: jenna.bushspies@dbtlabs.com

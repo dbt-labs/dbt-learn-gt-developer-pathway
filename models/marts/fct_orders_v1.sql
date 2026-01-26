@@ -1,3 +1,8 @@
+{{
+    config(
+        materialized='env_var("DBT_MATERIALIZATION")'
+    )
+}}
 with orders as  
 (
     select * 
