@@ -13,7 +13,6 @@ models:
           - relationships:
               field: customer_id
               to: ref('dim_customer')
-          - unique
           - not_null
           
       - name: status
@@ -39,7 +38,7 @@ models:
         data_type: date
         description: The date when the order was placed.
       - name: amount
-        data_type: float
+        data_type: decimal
         description: The total amount paid for the order, defaulting to 0 if no successful payment was recorded.
     versions:
         - v: 1

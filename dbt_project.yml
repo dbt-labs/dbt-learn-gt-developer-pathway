@@ -41,5 +41,9 @@ models:
     marts:
       +materialized: table
       +tags: ['marts']
+      orders_pivoted:
+        +grants: 
+          select: ['transformer']
+          
     staging:
       +schema: staging

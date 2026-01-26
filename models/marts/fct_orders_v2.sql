@@ -1,6 +1,7 @@
 {{
     config(
-        materialized='env_var("DBT_MATERIALIZATION")'
+        materialized=env_var("DBT_MATERIALIZATION"),
+        pre_hook='grant select on {{ target.schema }}.fct_orders to role transformer;'
     )
 }}
 with orders as  

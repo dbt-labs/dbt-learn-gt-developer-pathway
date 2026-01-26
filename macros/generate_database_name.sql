@@ -3,7 +3,7 @@
     {%- set default_database = target.database -%}
     {%- set target_name = env_var("DBT_ENVIRONMENT_NAME") -%}
     
-    {%- if custom_schema_name is none -%}
+    {%- if custom_database_name is none -%}
 
         {{ default_database }}_{{ target_name }} 
 
