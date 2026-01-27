@@ -5,7 +5,7 @@
     
     {%- if custom_database_name is none -%}
 
-        {{ default_database }} --_{{ target_name }} 
+        {{ default_database }}
 
     {%- else -%}
 
