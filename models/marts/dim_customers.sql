@@ -18,7 +18,7 @@ orders as (
         status,
         amount
 
-    from {{ ref('stg_jaffle_shop__orders') }}
+    from {{ ref('fct_orders') }}
 
 ),
 

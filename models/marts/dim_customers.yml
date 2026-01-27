@@ -23,6 +23,8 @@ models:
         data_type: int
       - name: employee_id
         data_type: int
+      - name: customer_tier
+        data_type: string
     
     versions:
       - v: 1
