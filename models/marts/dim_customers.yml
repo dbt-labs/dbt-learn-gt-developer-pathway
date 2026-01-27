@@ -1,6 +1,7 @@
 models:
 
   - name: dim_customers
+    description: This model consolidates customer information with their order history to provide insights into customer behavior and value. It includes personal details, order dates, and categorizes customers into tiers based on their total order value, which can be used for targeted marketing and customer relationship management.
     latest_version: 1
     config:
       access: public
@@ -10,21 +11,39 @@ models:
 
     columns:
       - name: customer_id
+        description: A unique identifier for each customer.
         data_type: int
+        data_tests:
+          - unique
+          - not_null
       - name: first_name
+        description: The first name of the customer.
         data_type: string
+        data_tests:
+          - not_null
       - name: last_name
+        description: The last name of the customer.
         data_type: string
+        data_tests:
+          - not_null
       - name: first_order_date
+        description: The date when the customer placed their first order.
         data_type: date
       - name: most_recent_order_date
+        description: The date when the customer placed their most recent order.
         data_type: date
       - name: number_of_orders
+        description: The total number of orders placed by the customer.
         data_type: int
       - name: employee_id
+        description: The identifier of the employee associated with the customer.
         data_type: int
       - name: customer_tier
+        description: The tier classification of the customer based on their total order value, used for marketing segmentation.
         data_type: string
+        data_tests:
+          - accepted_values:
+              values: ['Gold', 'Silver', 'Bronze']
     
     versions:
       - v: 1
