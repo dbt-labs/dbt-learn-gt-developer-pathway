@@ -2,7 +2,7 @@ models:
 
   - name: dim_customers
     description: This model consolidates customer information with their order history to provide insights into customer behavior and value. It includes personal details, order dates, and categorizes customers into tiers based on their total order value, which can be used for targeted marketing and customer relationship management.
-    latest_version: 1
+    
     config:
       access: public
       group: marketing
@@ -43,10 +43,12 @@ models:
         data_type: string
         data_tests:
           - accepted_values:
-              values: ['Gold', 'Silver', 'Bronze']
+              arguments: 
+                values: ['Gold', 'Silver', 'Bronze']
     
     versions:
       - v: 1
+      
         
 exposures:
   - name: customers_weekly
