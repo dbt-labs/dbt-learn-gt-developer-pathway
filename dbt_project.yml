@@ -47,3 +47,5 @@ models:
           
     staging:
       +schema: staging
+      +group: core
+      

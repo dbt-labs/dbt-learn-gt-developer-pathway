@@ -1,7 +1,8 @@
 {{
     config(
         materialized=env_var("DBT_MATERIALIZATION"),
-        pre_hook='grant select on {{ target.schema }}.fct_orders to role transformer;'
+        pre_hook='grant select on {{ target.schema }}.fct_orders to role transformer;',
+        access='public'
     )
 }}
 with orders as  
@@ -26,7 +27,7 @@ order_payments as (
 final as (
 
     select
-        orders.order_id,
+        orders.order_id::string as order_id,
         orders.customer_id,
         orders.order_date,
         orders.status,
