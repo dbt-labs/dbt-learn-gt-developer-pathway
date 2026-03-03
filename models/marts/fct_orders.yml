@@ -48,10 +48,10 @@ models:
         - v: 1
         - v: 2    
           columns:
-            include: all
-            exclude: order_id
-            name: order_id
-            data_type: string
+            - include: all
+              exclude: order_id
+              name: order_id
+              data_type: string
 
 exposures:
   - name: orders_weekly
