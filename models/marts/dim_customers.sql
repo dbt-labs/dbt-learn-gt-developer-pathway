@@ -1,3 +1,9 @@
+{{
+    config(
+        group='marketing',
+        access='public'
+    )
+}}
 with customers as (
 
     select

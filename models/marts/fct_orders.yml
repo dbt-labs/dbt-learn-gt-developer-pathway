@@ -31,13 +31,16 @@ models:
                   - 'shipped'
                   - 'placed'
               config:
-                severity: error
+                severity: Error
                 warn_if: ">10"
                 error_if: ">1000"
   
       - name: order_id
         data_type: int
         description: A unique identifier for each order.
+        constraints:
+          - type: not_null
+          - type: unique
       - name: order_date
         data_type: date
         description: The date when the order was placed.
@@ -46,12 +49,18 @@ models:
         description: The total amount paid for the order, defaulting to 0 if no successful payment was recorded.
     versions:
         - v: 1
-        - v: 2    
-          columns:
-            - include: all
-              exclude: order_id
-              name: order_id
-              data_type: string
+          config:
+            alias: fct_orders
+          
+          
+        - v: 2  
+          columns: 
+            include: all
+            exclude: order_id
+            name: order_id
+            data_type: string 
+          
+          
 
 exposures:
   - name: orders_weekly

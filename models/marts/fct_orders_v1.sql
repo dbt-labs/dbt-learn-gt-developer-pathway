@@ -1,6 +1,7 @@
 {{
     config(
-        materialized=env_var("DBT_MATERIALIZATION")
+        materialized="table",
+        deprecation_date='2026-03-17'
     )
 }}
 with orders as  

@@ -34,18 +34,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # instead be materialized as tables. Any models you add to the root of the models folder will 
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
+vars:
+  # The `start_date` variable is accessible to all resources
+  look_back: 3
 
 models:
   dbt_developer_pathway:
     # Applies to all files under models/example/
+    staging:
+      +access: protected
+      +schema: staging
+      +group: core
     marts:
+      +access: public
       +materialized: table
-      +tags: ['marts']
+      +tags: ['edw']
       orders_pivoted:
         +grants: 
           select: ['transformer']
-          
-    staging:
-      +schema: staging
-      +group: core
+      
       
