@@ -31,7 +31,7 @@ models:
                   - 'shipped'
                   - 'placed'
               config:
-                severity: Error
+                severity: error
                 warn_if: ">10"
                 error_if: ">1000"
   
@@ -55,10 +55,10 @@ models:
           
         - v: 2  
           columns: 
-            include: all
-            exclude: order_id
-            name: order_id
-            data_type: string 
+            - include: all
+              exclude: [order_id]
+              name: order_id
+              data_type: string 
           
           
 
