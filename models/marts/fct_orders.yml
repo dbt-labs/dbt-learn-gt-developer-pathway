@@ -57,8 +57,10 @@ models:
           columns: 
             - include: all
               exclude: [order_id]
-              name: order_id
+            - name: order_id
               data_type: string 
+            - name: return_flag
+              data_type: boolean
           
           
 
