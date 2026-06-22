@@ -1,7 +1,8 @@
 {{
     config(
         materialized="table",
-        deprecation_date='2026-03-17'
+        deprecation_date='2026-06-23',
+        access='public'
     )
 }}
 with orders as  
