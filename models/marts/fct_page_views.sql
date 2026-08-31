@@ -5,7 +5,7 @@
 }}
 
 with events as (
-    select * from {{ ref('stg_snowplow__events') }}
+    select * from stg_snowplow__events
 ),
 page_views as (
     select * from events
