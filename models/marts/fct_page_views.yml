@@ -1,0 +1,52 @@
+models:
+  - name: fct_page_views
+    description: >
+      One row per Snowplow page-view event, enriched with approximate time on page
+      and the first and latest timestamps recorded for the page view.
+    columns:
+      - name: event_id
+        description: The unique identifier for the Snowplow event represented by this row.
+        data_tests:
+          - unique
+          - not_null
+      - name: page_view_id
+        description: The identifier used to group events belonging to the same page view.
+        data_tests:
+          - not_null:
+              config: 
+                where: "max_collector_tstamp < current_date"
+      - name: anonymous_user_id
+        description: The anonymous identifier assigned to the user who generated the event.
+      - name: session_id
+        description: The identifier for the session in which the page view occurred.
+      - name: event
+        description: The Snowplow event type; rows in this model represent page-view events.
+      - name: device_type
+        description: The type of device used to view the page.
+      - name: page_url
+        description: The complete URL of the viewed page.
+      - name: page_title
+        description: The title of the viewed page.
+      - name: page_urlscheme
+        description: The scheme component of the page URL, such as HTTP or HTTPS.
+      - name: page_urlhost
+        description: The host component of the page URL.
+      - name: page_urlport
+        description: The port component of the page URL, when present.
+      - name: page_urlpath
+        description: The path component of the page URL.
+      - name: page_urlquery
+        description: The query-string component of the page URL, when present.
+      - name: page_urlfragment
+        description: The fragment component of the page URL, when present.
+      - name: collector_tstamp
+        description: The timestamp when the Snowplow collector received the page-view event.
+      - name: derived_tstamp
+        description: The timestamp derived by Snowplow for when the page-view event occurred.
+      - name: approx_time_on_page
+        description: Approximate time on page, calculated as ten units for each event associated with the page view.
+      - name: page_view_start
+        description: The earliest derived event timestamp associated with the page view.
+      - name: max_collector_tstamp
+        description: The latest collector timestamp associated with the page view, used as the incremental watermark.
+        

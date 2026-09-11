@@ -64,6 +64,28 @@ models:
           
           
 
+
+unit_tests:
+  - name: test_fct_orders_calculates_successful_payment_amount
+    description: Successful payments are summed, while orders without a successful payment default to zero.
+    model: fct_orders
+    given:
+      - input: ref('stg_jaffle_shop__orders')
+        rows:
+          - {order_id: 1, customer_id: 10, order_date: '2024-01-01', status: completed}
+          - {order_id: 2, customer_id: 20, order_date: '2024-01-02', status: returned}
+      - input: ref('stg_stripe__payment')
+        rows:
+          - {order_id: 1, status: success, amount: 10.00}
+          - {order_id: 1, status: success, amount: 5.00}
+          - {order_id: 1, status: fail, amount: 99.00}
+          - {order_id: 2, status: fail, amount: 20.00}
+    expect:
+      rows:
+        - {order_id: 1, amount: 15.00}
+        - {order_id: 2, amount: 0.00}
+
+
 exposures:
   - name: orders_weekly
     type: dashboard
